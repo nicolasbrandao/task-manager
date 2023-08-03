@@ -8,6 +8,9 @@ dependencies:
   '@types/express':
     specifier: ^4.17.17
     version: 4.17.17
+  acebase:
+    specifier: ^1.29.2
+    version: 1.29.2
   express:
     specifier: ^4.18.2
     version: 4.18.2
@@ -315,6 +318,19 @@ packages:
     dependencies:
       mime-types: 2.1.35
       negotiator: 0.6.3
+    dev: false
+
+  /acebase-core@1.27.5:
+    resolution: {integrity: sha512-mogTRyHg+5/TYp6puXcdhTUmupPLGyWSBpzf/1gXANEk/QffaPvEFGzolJ5fTIVFl3UhVoYcUj2jEDbQHmGGMQ==}
+    optionalDependencies:
+      rxjs: 7.8.1
+    dev: false
+
+  /acebase@1.29.2:
+    resolution: {integrity: sha512-kcPln+pUcDesCE8gcHOzcgE7jRvhWdU/cHF+KeJz+yeLFgJ/rj38UQpMZ8mVCCrH9V8CRQyi0ugqxbgWnwF82g==}
+    dependencies:
+      acebase-core: 1.27.5
+      unidecode: 0.1.8
     dev: false
 
   /array-flatten@1.1.1:
@@ -681,6 +697,14 @@ packages:
     resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
     dev: false
 
+  /rxjs@7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
+    requiresBuild: true
+    dependencies:
+      tslib: 2.6.1
+    dev: false
+    optional: true
+
   /safe-buffer@5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
     dev: false
@@ -756,6 +780,11 @@ packages:
     engines: {node: '>=0.6'}
     dev: false
 
+  /tslib@2.6.1:
+    resolution: {integrity: sha512-t0hLfiEKfMUoqhG+U1oid7Pva4bbDPHYfJNiB7BiIjRkj1pyC++4N3huJfqY6aRH6VTB0rvtzQwjM4K6qpfOig==}
+    dev: false
+    optional: true
+
   /tsx@3.12.7:
     resolution: {integrity: sha512-C2Ip+jPmqKd1GWVQDvz/Eyc6QJbGfE7NrR3fx5BpEHMZsEHoIxHL1j+lKdGobr8ovEyqeNkPLSKp6SCSOt7gmw==}
     hasBin: true
@@ -779,6 +808,11 @@ packages:
     resolution: {integrity: sha512-zaWCozRZ6DLEWAWFrVDz1H6FVXzUSfTy5FUMWsQlU8Ym5JP9eO4xkTIROFCQvhQf61z6O/G6ugw3SgAnvvm+HA==}
     engines: {node: '>=14.17'}
     hasBin: true
+    dev: false
+
+  /unidecode@0.1.8:
+    resolution: {integrity: sha512-SdoZNxCWpN2tXTCrGkPF/0rL2HEq+i2gwRG1ReBvx8/0yTzC3enHfugOf8A9JBShVwwrRIkLX0YcDUGbzjbVCA==}
+    engines: {node: '>= 0.4.12'}
     dev: false
 
   /unpipe@1.0.0:
