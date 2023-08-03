@@ -1,4 +1,5 @@
 import { Router } from "express"
+import { task } from "../database/models/tasks"
 
 export const taskController = Router()
 
@@ -8,12 +9,18 @@ taskController
     next()
   })
 
-  .get('/', (req, res) => {
-    res.send('List tasks')
+  .get('/', async (req, res) => {
+    const tasks = await task.list()
+    
+    res.send(`List tasks: ${JSON.stringify(tasks)}`)
   })
 
-  .post('/', (req, res) => {
-    res.send('Create tasks')
+  .post('/', async (req, res) => {
+    const { counter } = await task.create({
+      description: "description",
+      title: "title"
+    })
+    res.send(`tasks counter: ${counter}`)
   })
 
   .delete('/:id', (req, res) => {
