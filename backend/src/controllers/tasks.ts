@@ -28,10 +28,11 @@ taskController
     res.send('Delete task: ' + req.params.id)
   })
 
-  .put('/:id', (req, res) => {
+  .put('/:id', async (req, res) => {
+    await task.update({
+      id: req.params.id,
+      description: "description updated",
+      title: "title updated"
+    })
     res.send('Update task: ' + req.params.id)
-  })
-
-  .get('/:id', (req, res) => {
-    res.send('Task: ' + req.params.id)
   })
