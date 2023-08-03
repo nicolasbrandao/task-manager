@@ -23,7 +23,8 @@ taskController
     res.send(`tasks counter: ${counter}`)
   })
 
-  .delete('/:id', (req, res) => {
+  .delete('/:id', async (req, res) => {
+    await task.delete(req.params.id)
     res.send('Delete task: ' + req.params.id)
   })
 
