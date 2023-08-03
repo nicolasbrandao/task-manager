@@ -8,7 +8,7 @@ const app = express()
 const port = 3000
 
 // middlewares
-app.use(bodyParser)
+app.use(bodyParser.json())
 app.use(timeLogger)
 
 // endpoints
