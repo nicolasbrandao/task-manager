@@ -12,8 +12,6 @@ const collection = db.ref(COLLECTION_NAME);
 export class TaskDAO {
   async create(task: Omit<Task, "id">) {
     await collection.push(task);
-    const counter = await collection.count();
-    return { counter };
   }
 
   async list(): Promise<Task[]> {
@@ -30,12 +28,12 @@ export class TaskDAO {
   }
 
   async delete(id: string) {
-    return db.ref(`${COLLECTION_NAME}/${id}`).remove()
+    await db.ref(`${COLLECTION_NAME}/${id}`).remove()
   }
 
   async update(updatedTask: Task) {
     const { id, title, description } = updatedTask;
-    return db
+    await db
       .ref(`${COLLECTION_NAME}/${id}`)
       .update({ title, description })
   }
