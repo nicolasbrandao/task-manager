@@ -32,6 +32,13 @@ export class TaskDAO {
   async delete(id: string) {
     return db.ref(`${COLLECTION_NAME}/${id}`).remove()
   }
+
+  async update(updatedTask: Task) {
+    const { id, title, description } = updatedTask;
+    return db
+      .ref(`${COLLECTION_NAME}/${id}`)
+      .update({ title, description })
+  }
 }
 
 export const task = new TaskDAO();
