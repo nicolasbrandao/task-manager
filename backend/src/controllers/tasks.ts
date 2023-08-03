@@ -4,11 +4,6 @@ import { task } from "../database/models/tasks"
 export const taskController = Router()
 
 taskController
-  .use((req, res, next) => {
-    console.log('Time: ', Date.now())
-    next()
-  })
-
   .get('/', async (req, res) => {
     const tasks = await task.list()
     res.json(tasks)
