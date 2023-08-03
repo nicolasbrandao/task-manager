@@ -6,16 +6,20 @@ type Task = {
   description: string;
 };
 
+type TaskCollection = {
+  [task_id: string]: Omit<Task, 'id'>
+}
+
 const COLLECTION_NAME = "tasks"
 const collection = db.ref(COLLECTION_NAME);
 
 export class TaskDAO {
-  async create(task: Omit<Task, "id">) {
+  async create(task: TaskCollection[string]) {
     await collection.push(task);
   }
 
   async list(): Promise<Task[]> {
-    const snapshot = await collection.get<Record<string, Omit<Task, "id">>>();
+    const snapshot = await collection.get<TaskCollection>();
     const taskCollection = snapshot.val() ?? {};
     console.log({ taskCollection });
 
