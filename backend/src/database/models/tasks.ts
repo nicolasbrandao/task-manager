@@ -6,7 +6,8 @@ type Task = {
   description: string;
 };
 
-const collection = db.ref("tasks");
+const COLLECTION_NAME = "tasks"
+const collection = db.ref(COLLECTION_NAME);
 
 export class TaskDAO {
   async create(task: Omit<Task, "id">) {
@@ -26,6 +27,10 @@ export class TaskDAO {
 
     console.log({ tasks });
     return tasks;
+  }
+
+  async delete(id: string) {
+    return db.ref(`${COLLECTION_NAME}/${id}`).remove()
   }
 }
 
