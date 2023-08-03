@@ -1,4 +1,4 @@
-import express, { Handler } from "express"
+import express from "express"
 import bodyParser from "body-parser"
 import { taskController } from "./controllers/tasks"
 import { initDatabase } from "./database/db"
