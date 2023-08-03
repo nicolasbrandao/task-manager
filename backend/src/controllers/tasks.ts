@@ -10,10 +10,8 @@ taskController
   })
 
   .post('/', async (req, res) => {
-    await task.create({
-      description: "description",
-      title: "title"
-    })
+    const { title, description } = req.body
+    await task.create({ description, title })
     noContentResponse(res)
   })
 
@@ -23,11 +21,9 @@ taskController
   })
 
   .put('/:id', async (req, res) => {
-    await task.update({
-      id: req.params.id,
-      description: "description updated2",
-      title: "title updated2"
-    })
+    const { id } = req.params
+    const { title, description } = req.body
+    await task.update({ id, description, title })
     noContentResponse(res)
   })
 
