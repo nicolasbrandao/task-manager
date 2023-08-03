@@ -1,10 +1,13 @@
+import { z } from "zod";
 import { db } from "../db";
 
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-};
+export const TaskSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+})
+
+type Task = z.infer<typeof TaskSchema>;
 
 type TaskCollection = {
   [task_id: string]: Omit<Task, 'id'>

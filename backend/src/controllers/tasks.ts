@@ -1,5 +1,5 @@
 import { Router, Response } from "express"
-import { task } from "../database/models/tasks"
+import { TaskSchema, task } from "../database/models/tasks"
 
 export const taskController = Router()
 
@@ -10,6 +10,16 @@ taskController
   })
 
   .post('/', async (req, res) => {
+    const result = TaskSchema
+      .strict()
+      .omit({ id: true })
+      .safeParse(req.body);
+
+    // bad request
+    if (!result.success) {
+      return res.status(400).json(result.error);
+    }
+
     const { title, description } = req.body
     await task.create({ description, title })
     noContentResponse(res)
@@ -23,7 +33,17 @@ taskController
   .put('/:id', async (req, res) => {
     const { id } = req.params
     const { title, description } = req.body
-    await task.update({ id, description, title })
+
+    const result = TaskSchema
+      .strict()
+      .safeParse({ id, description, title });
+
+    // bad request
+    if (!result.success) {
+      return res.status(400).json(result.error);
+    }
+
+    await task.update(result.data)
     noContentResponse(res)
   })
 
