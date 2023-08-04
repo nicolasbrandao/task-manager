@@ -1,7 +1,9 @@
 import { fetchAllTasks } from "../lib/utils"
 
-export default async function TasksList() {
-  const tasks = await fetchAllTasks();
+const tasks = await fetchAllTasks();
+
+export default function TasksList() {
+
   return (
     <ul>
       {tasks.map(task => <li key={task.id}>{task.description}</li>)}
