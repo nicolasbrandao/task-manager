@@ -3,15 +3,22 @@
   line-height: 1.5;
   font-weight: 400;
 
+  --task-orange: #ff8f01;
+  --task-gray:#212121;
+  --task-gray-2: #292929;
+  
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #212121;
+  color: white;
+  background-color: var(--task-gray);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+
 }
 
 * {
