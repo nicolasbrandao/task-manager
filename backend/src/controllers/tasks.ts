@@ -6,7 +6,7 @@ export const taskController = Router()
 taskController
   .get('/', async (req, res) => {
     const tasks = await task.list()
-    res.json(tasks)
+    res.status(200).json(tasks)
   })
 
   .post('/', async (req, res) => {
