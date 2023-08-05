@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+  align-items: center;
+  margin: 1rem auto;
+  width: fit-content;
+  color: var(--task-orange);
+}
