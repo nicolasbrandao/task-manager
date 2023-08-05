@@ -1,22 +1,29 @@
-import { Typography } from "@mui/material";
-import "./Hero.styles.css"
+import { Box, Typography } from "@mui/material";
 import AddTaskIcon from '@mui/icons-material/AddTask';
 
 
 export default function Hero() {
   return (
-    <div className="container">
-      <AddTaskIcon 
-        sx={{
-          height: "50px",
-          width: "50px",
-          color: "var(--task-orange)"
-        }}
-      />
+    <Box 
+      sx={{ 
+        color: "primary.main",
+        display: "flex",
+        justifyItems: "center",
+        alignItems: "center",
+        width: "fit-content",
+        margin: "20px auto"
+      }}
+    >
+      <AddTaskIcon sx={{
+        height: "60px",
+        width: "60px"
+      }} />
       <Typography
         component="h1"
-        variant="h4"
-      >Task Manager</Typography>
-    </div>
+        variant="h3"
+      >
+        Task Manager
+      </Typography>
+    </Box>
   )
 }
