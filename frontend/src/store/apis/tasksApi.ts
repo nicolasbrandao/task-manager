@@ -26,12 +26,25 @@ const tasksApi = createApi({
           }
         }
       }),
+      createTask: builder.mutation ({
+        query: (task: Omit<Task, "id">) => {
+          return {
+            url: '/',
+            method: 'POST',
+            body: {
+              title: task.title,
+              description: task.description
+            }
+          }
+        }
+      })
     }
   },
 })
 
 export const {
   useFetchAllTasksQuery,
-  useDeleteTaskMutation
+  useDeleteTaskMutation,
+  useCreateTaskMutation
 } = tasksApi
 export { tasksApi }
