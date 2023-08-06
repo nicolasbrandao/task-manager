@@ -79,7 +79,7 @@ export default function AddTask() {
               size='small'
               fullWidth
               inputRef={titleRef}
-              inputProps={{maxlength: "25"}}
+              inputProps={{maxlength: "22"}}
             />
             <TextField
               label="Description"
@@ -89,8 +89,8 @@ export default function AddTask() {
               fullWidth
               inputRef={descriptionRef}
               multiline
-              rows={2}
-              inputProps={{maxlength: "250"}}
+              rows={1}
+              inputProps={{maxlength: "80"}}
             />
           </Box>
           <Tooltip title="Create task">

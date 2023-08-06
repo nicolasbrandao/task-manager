@@ -45,6 +45,7 @@ export default function EditTask() {
     if (result.success) {
       dispatch(updateEditingTask(result.data))
       updateTask(result.data)
+      handleClose()
     } else {
       console.log(result.error)
       setShowAlert(true)
@@ -101,7 +102,7 @@ export default function EditTask() {
                   required
                   size='small'
                   fullWidth
-                  inputProps={{maxlength: "25"}}
+                  inputProps={{maxlength: "22"}}
                 />
                 <TextField
                   label="Description"
@@ -114,7 +115,7 @@ export default function EditTask() {
                   fullWidth
                   multiline
                   rows={4}
-                  inputProps={{maxlength: "250"}}
+                  inputProps={{maxlength: "80"}}
                 />
               </Box>
             </Box>
