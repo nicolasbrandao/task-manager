@@ -9,9 +9,8 @@ const app = express()
 const port = 3000
 
 // middlewares
+// TODO: use env var
 app.use(cors())
-// TODO: use env var here
-app.use('http://localhost:5173/', cors())
 app.use(bodyParser.json())
 app.use(timeLogger)
 
