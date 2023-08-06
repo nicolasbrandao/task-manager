@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import AddTask from './components/AddTask'
 import Hero from './components/Hero'
 import TasksList from './components/TasksList'
@@ -10,7 +10,7 @@ function App() {
 
   const dispatch = useDispatch()
 
-  const { data } = useFetchAllTasksQuery()
+  const { data, isLoading } = useFetchAllTasksQuery()
 
   if (data) dispatch(updateTasksList(data))
 
@@ -19,12 +19,19 @@ function App() {
       sx={{
         maxWidth: "1000px",
         minWidth: "380px",
-        margin: "0 auto"
+        minHeight: "100vh",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "start",
       }}
     >
       <Hero />
       <AddTask />
-      <TasksList />
+        {isLoading
+          ? <CircularProgress variant={"indeterminate"} size={80} sx={{ margin: "2000px auto"}}/>
+          : <TasksList />
+        }
       <EditTaskDialog />
     </Box>
   )
