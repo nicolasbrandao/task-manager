@@ -1,4 +1,4 @@
-import { Box, CircularProgress } from '@mui/material'
+import { Alert, Box, CircularProgress } from '@mui/material'
 import AddTask from './components/AddTask'
 import Hero from './components/Hero'
 import TasksList from './components/TasksList'
@@ -10,8 +10,8 @@ function App() {
 
   const dispatch = useDispatch()
 
-  const { data, isLoading } = useFetchAllTasksQuery()
-
+  const { data, isLoading, isError } = useFetchAllTasksQuery()
+ 
   if (data) dispatch(updateTasksList(data))
 
   return (
@@ -28,6 +28,7 @@ function App() {
     >
       <Hero />
       <AddTask />
+        {isError && <Alert severity="error">Error fetching tasks</Alert>}
         {isLoading
           ? <CircularProgress variant={"indeterminate"} size={80} sx={{ margin: "2000px auto"}}/>
           : <TasksList />
