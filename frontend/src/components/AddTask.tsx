@@ -1,13 +1,20 @@
-import { Box, IconButton, TextField, Tooltip } from "@mui/material"
+import { Alert, Box, IconButton, TextField, Tooltip } from "@mui/material"
 import AddIcon from '@mui/icons-material/Add';
 import { useCreateTaskMutation } from "../store";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { Task, TaskSchema } from "../lib/utils";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 
 
 export default function AddTask() {
   const [createTask] = useCreateTaskMutation();
+  const [showAlert, setShowAlert] = useState(false);
+
+  const handleCloseAlert = () => {
+    setShowAlert(false)
+  }
   
   // TODO: ensure this is the only possible type solution
   const titleRef = useRef<HTMLInputElement>(null)
@@ -27,13 +34,33 @@ export default function AddTask() {
       createTask(result.data)
     } else {
       console.log(result.error)
+      setShowAlert(true)
     }
   }
 
   return (
     <Box sx={{
-      margin: "8px"
+      margin: "8px",
+      display: "flex",
+      flexDirection: "column",
+      gap: "8px"
     }}>
+      {showAlert &&
+        <Alert 
+          severity="error"
+          action={
+            <IconButton 
+              color="inherit" 
+              size="small"
+              onClick={handleCloseAlert}
+            >
+              <CloseIcon />
+            </IconButton>
+          }
+        >
+          Failed to create task
+        </Alert>
+      }
       <form autoComplete="off" onSubmit={handleTaskCreation}>
         <Box sx={{
           display: "flex",

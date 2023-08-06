@@ -1,8 +1,10 @@
-import { Dialog, DialogTitle, Button, Box, TextField, DialogActions, DialogContent } from "@mui/material";
+import { Dialog, DialogTitle, Button, Box, TextField, DialogActions, DialogContent, Alert, IconButton } from "@mui/material";
 import { RootState, toggleEditDialog, updateEditingTask, useUpdateTaskMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { TaskSchema } from "../lib/utils";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export default function EditTask() {
   const { isEditingDialogOpen, editingTask } = useSelector((state: RootState) => {
@@ -16,6 +18,11 @@ export default function EditTask() {
 
   const handleClose = () => {
     dispatch(toggleEditDialog(false))
+  }
+
+  const [showAlert, setShowAlert] = useState(false);
+  const handleCloseAlert = () => {
+    setShowAlert(false);
   }
 
   // TODO: ensure this is the only possible type solution
@@ -40,16 +47,40 @@ export default function EditTask() {
       updateTask(result.data)
     } else {
       console.log(result.error)
+      setShowAlert(true)
     }
   }
 
   return (
     <Dialog open={isEditingDialogOpen} onClose={handleClose}>
       <DialogTitle>Edit Task</DialogTitle>
-      <DialogContent>
-        <Box sx={{
-         margin: "8px"
-        }}>
+      <DialogContent 
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap:"4px"
+        }}
+      > {showAlert &&
+          <Alert 
+            severity="error"
+            action={
+              <IconButton 
+                color="inherit" 
+                size="small"
+                onClick={handleCloseAlert}
+              >
+                <CloseIcon />
+              </IconButton>
+            }
+          >
+            Failed to update task
+          </Alert>
+        }
+        <Box 
+          sx={{
+            margin: "8px"
+          }}
+        >  
           <form noValidate autoComplete="off" id="form" onSubmit={handleSave}>
             <Box sx={{
               display: "flex",
