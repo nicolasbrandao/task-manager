@@ -4,6 +4,7 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useDispatch } from 'react-redux'
 import EditIcon from '@mui/icons-material/Edit';
 import { toggleEditDialog, updateEditingTask, useDeleteTaskMutation } from "../store";
+import { MouseEventHandler } from "react";
 
 type Props = {
   task: Task
@@ -22,18 +23,20 @@ export default function TaskCard({ task }: Props) {
 
   const [deleteTask] = useDeleteTaskMutation()
 
-  const handleRemoveTask = () => {
+  const handleRemoveTask: MouseEventHandler<HTMLButtonElement> = (event) => {
     deleteTask(task.id)
+    event.stopPropagation();
   }
 
   return (
-    <MenuItem>
+    <MenuItem onClick={() => handleEditTask(task)}>
       <ListItemText primary={task.title} />
       <Typography 
         sx={{
           display: `${isSmallScreen && "none"}`,
           marginRight: "16px",
           color: "grey.400",
+          maxWidth: "50%"
         }}
         noWrap>{task.description}</Typography>
       <Box>
