@@ -5,9 +5,6 @@ import { FormEvent, useRef, useState } from "react";
 import { Task, TaskSchema } from "../lib/utils";
 import CloseIcon from '@mui/icons-material/Close';
 
-
-
-
 export default function AddTask() {
   const [createTask] = useCreateTaskMutation();
   const [showAlert, setShowAlert] = useState(false);
