@@ -27,4 +27,5 @@ export { updateTasksList, updateEditingTask, toggleEditDialog }
 
 export {
   useFetchAllTasksQuery,
+  useDeleteTaskMutation
 } from './apis/tasksApi'

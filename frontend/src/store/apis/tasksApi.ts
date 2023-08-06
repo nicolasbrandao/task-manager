@@ -18,11 +18,20 @@ const tasksApi = createApi({
           }
         },
       }),
+      deleteTask: builder.mutation ({
+        query: (taskId: string) => {
+          return {
+            url: `/${taskId}`,
+            method: 'DELETE',
+          }
+        }
+      }),
     }
   },
 })
 
 export const {
   useFetchAllTasksQuery,
+  useDeleteTaskMutation
 } = tasksApi
 export { tasksApi }
