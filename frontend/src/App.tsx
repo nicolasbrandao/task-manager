@@ -3,15 +3,10 @@ import AddTask from './components/AddTask'
 import Hero from './components/Hero'
 import TasksList from './components/TasksList'
 import EditTaskDialog from './components/EditTaskDialog'
-import { RootState, updateTasksList, useFetchAllTasksQuery } from './store'
-import { useSelector, useDispatch } from 'react-redux'
+import { updateTasksList, useFetchAllTasksQuery } from './store'
+import { useDispatch } from 'react-redux'
 
 function App() {
-  const { editingTask, } = useSelector((state: RootState) => {
-    return {
-      editingTask: state.tasks.editingTask,
-    }
-  })
 
   const dispatch = useDispatch()
 
@@ -30,8 +25,7 @@ function App() {
       <Hero />
       <AddTask />
       <TasksList />
-      <EditTaskDialog task={editingTask}
-      />
+      <EditTaskDialog />
     </Box>
   )
 }
