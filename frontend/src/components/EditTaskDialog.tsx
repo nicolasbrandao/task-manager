@@ -6,7 +6,7 @@ import { TaskSchema } from "../lib/utils";
 import CloseIcon from '@mui/icons-material/Close';
 
 
-export default function EditTask() {
+export default function EditTaskDialog() {
   const { isEditingDialogOpen, editingTask } = useSelector((state: RootState) => {
     return {
       isEditingDialogOpen: state.tasks.isEditingDialogOpen,
