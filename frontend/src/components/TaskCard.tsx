@@ -3,7 +3,7 @@ import { Task } from "../lib/utils";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useDispatch } from 'react-redux'
 import EditIcon from '@mui/icons-material/Edit';
-import { toggleEditDialog, updateEditingTask } from "../store";
+import { toggleEditDialog, updateEditingTask, useDeleteTaskMutation } from "../store";
 
 type Props = {
   task: Task
@@ -18,6 +18,12 @@ export default function TaskCard({ task }: Props) {
   const handleEditTask = (task: Task) => {
     dispatch(updateEditingTask(task))
     dispatch(toggleEditDialog(true))
+  }
+
+  const [deleteTask] = useDeleteTaskMutation()
+
+  const handleRemoveTask = () => {
+    deleteTask(task.id)
   }
 
   return (
@@ -41,7 +47,7 @@ export default function TaskCard({ task }: Props) {
           </IconButton>
         </Tooltip>
         <Tooltip title="Remove task">
-          <IconButton aria-label="remove task">
+          <IconButton aria-label="remove task" onClick={handleRemoveTask}>
             <HighlightOffIcon
               sx={{
                 color: "primary.main"
