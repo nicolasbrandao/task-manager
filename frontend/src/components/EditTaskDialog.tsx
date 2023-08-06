@@ -1,73 +1,14 @@
 import { Dialog, DialogTitle, Button, Box, TextField, DialogActions, DialogContent } from "@mui/material";
-import { ChangeEvent, useState } from "react";
-import { Task } from "../lib/utils";
-import { RootState, toggleEditDialog, updateEditingTask } from "../store";
-import { useSelector, useDispatch } from "react-redux"
+import { RootState, toggleEditDialog, updateEditingTask, useUpdateTaskMutation } from "../store";
+import { useSelector, useDispatch } from "react-redux";
+import { FormEvent, useRef } from "react";
+import { TaskSchema } from "../lib/utils";
 
-type FormProps = {
-  task: Task
-}
-
-function EditTaskForm({ task }: FormProps) {
-  const [title, setTitle] = useState(task.title)
-  const [description, setDescription] = useState(task.description)
-
-  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-
-  const handleDescriptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setDescription(event.target.value);
-  };
-
-  return (
-    <Box sx={{
-      margin: "8px"
-    }}>
-      <form noValidate autoComplete="off">
-        <Box sx={{
-          display: "flex",
-          gap: "8px"
-        }}>
-          <Box sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-            width: "100%",
-          }}>
-            <TextField
-              label="Title"
-              value={title}
-              onChange={handleTitleChange}
-              variant="outlined"
-              required
-              size='small'
-              fullWidth
-            />
-            <TextField
-              label="Description"
-              value={description}
-              onChange={handleDescriptionChange}
-              variant="outlined"
-              required
-              size='small'
-              fullWidth
-            />
-          </Box>
-        </Box>
-      </form>
-    </Box>
-  )
-}
-
-type DialogProps = {
-  task: Task,
-}
-
-export default function EditTask({ task }: DialogProps) {
-  const { isEditingDialogOpen, } = useSelector((state: RootState) => {
+export default function EditTask() {
+  const { isEditingDialogOpen, editingTask } = useSelector((state: RootState) => {
     return {
-      isEditingDialogOpen: state.tasks.isEditingDialogOpen
+      isEditingDialogOpen: state.tasks.isEditingDialogOpen,
+      editingTask: state.tasks.editingTask
     }
   })
 
@@ -77,21 +18,77 @@ export default function EditTask({ task }: DialogProps) {
     dispatch(toggleEditDialog(false))
   }
 
-  const handleSave = () => {
-    dispatch(updateEditingTask(task))
-    // TODO: MAKE UPDATE TASK REQUEST
-    handleClose()
+  // TODO: ensure this is the only possible type solution
+  const titleRef = useRef<HTMLInputElement>(null)
+  const descriptionRef = useRef<HTMLInputElement>(null)
+  const [updateTask] = useUpdateTaskMutation()
+
+  const handleSave = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const updatedTask = {
+      id: editingTask.id,
+      title: titleRef!.current!.value,
+      description: descriptionRef!.current!.value
+    }
+    const result = TaskSchema
+      .strict()
+      .safeParse(updatedTask);
+
+    // TODO: handle errors properly
+    if (result.success) {
+      dispatch(updateEditingTask(result.data))
+      updateTask(result.data)
+    } else {
+      console.log(result.error)
+    }
   }
 
   return (
     <Dialog open={isEditingDialogOpen} onClose={handleClose}>
       <DialogTitle>Edit Task</DialogTitle>
       <DialogContent>
-        <EditTaskForm task={task} />
+        <Box sx={{
+         margin: "8px"
+        }}>
+          <form noValidate autoComplete="off" id="form" onSubmit={handleSave}>
+            <Box sx={{
+              display: "flex",
+              gap: "8px"
+            }}>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "8px",
+                width: "100%",
+              }}>
+                <TextField
+                  label="Title"
+                  defaultValue={editingTask.title}
+                  inputRef={titleRef}
+                  name="title"
+                  variant="outlined"
+                  required
+                  size='small'
+                  fullWidth
+                />
+                <TextField
+                  label="Description"
+                  defaultValue={editingTask.description}
+                  inputRef={descriptionRef}
+                  name="description"
+                  variant="outlined"
+                  required
+                  size='small'
+                  fullWidth
+                />
+              </Box>
+            </Box>
+          </form>
+        </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button onClick={handleSave}>Save</Button>
+        <Button type="submit" form="form">Save</Button>
       </DialogActions>
     </Dialog>
   );
