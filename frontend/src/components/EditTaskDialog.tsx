@@ -102,7 +102,7 @@ export default function EditTask() {
                   required
                   size='small'
                   fullWidth
-                  inputProps={{maxlength: "22"}}
+                  inputProps={{maxLength: "22"}}
                 />
                 <TextField
                   label="Description"
@@ -115,7 +115,7 @@ export default function EditTask() {
                   fullWidth
                   multiline
                   rows={4}
-                  inputProps={{maxlength: "80"}}
+                  inputProps={{maxLength: "80"}}
                 />
               </Box>
             </Box>
