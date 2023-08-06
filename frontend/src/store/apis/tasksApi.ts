@@ -8,6 +8,7 @@ const tasksApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: URL,
   }),
+  tagTypes: ['Task'],
   endpoints(builder) {
     return {
       fetchAllTasks: builder.query<Task[], void>({
@@ -17,6 +18,7 @@ const tasksApi = createApi({
             method: 'GET',
           }
         },
+        providesTags: ['Task']
       }),
       deleteTask: builder.mutation ({
         query: (taskId: string) => {
@@ -24,7 +26,8 @@ const tasksApi = createApi({
             url: `/${taskId}`,
             method: 'DELETE',
           }
-        }
+        },
+        invalidatesTags: ['Task']
       }),
       createTask: builder.mutation ({
         query: (task: Omit<Task, "id">) => {
@@ -36,7 +39,21 @@ const tasksApi = createApi({
               description: task.description
             }
           }
-        }
+        },
+        invalidatesTags: ['Task']
+      }),
+      updateTask: builder.mutation ({
+        query: (task: Task) => {
+          return {
+            url: `/${task.id}`,
+            method: 'PUT',
+            body: {
+              title: task.title,
+              description: task.description
+            }
+          }
+        },
+        invalidatesTags: ['Task']
       })
     }
   },
@@ -45,6 +62,7 @@ const tasksApi = createApi({
 export const {
   useFetchAllTasksQuery,
   useDeleteTaskMutation,
-  useCreateTaskMutation
+  useCreateTaskMutation,
+  useUpdateTaskMutation
 } = tasksApi
 export { tasksApi }
