@@ -9,7 +9,7 @@ const app = express()
 const port = 3000
 
 // middlewares
-// TODO: use env var
+// TODO: use env var e conferir o cors para somente uma origem ou mais
 app.use(cors())
 app.use(bodyParser.json())
 app.use(timeLogger)
