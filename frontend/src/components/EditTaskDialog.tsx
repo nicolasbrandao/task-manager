@@ -1,9 +1,10 @@
-import { Dialog, DialogTitle, Button, Box, TextField, DialogActions, DialogContent, Alert, IconButton } from "@mui/material";
+import { Dialog, DialogTitle, Button, Box, TextField, DialogActions, DialogContent, Alert } from "@mui/material";
 import { RootState, toggleEditDialog, updateEditingTask, useUpdateTaskMutation } from "../store";
 import { useSelector, useDispatch } from "react-redux";
-import { FormEvent, useRef, useState } from "react";
-import { TaskSchema } from "../lib/utils";
-import CloseIcon from '@mui/icons-material/Close';
+import { Task, TaskSchema } from "../lib/utils";
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form'
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 
 
 export default function EditTaskDialog() {
@@ -20,36 +21,27 @@ export default function EditTaskDialog() {
     dispatch(toggleEditDialog(false))
   }
 
-  const [showAlert, setShowAlert] = useState(false);
-  const handleCloseAlert = () => {
-    setShowAlert(false);
-  }
-
-  // TODO: ensure this is the only possible type solution
-  const titleRef = useRef<HTMLInputElement>(null)
-  const descriptionRef = useRef<HTMLInputElement>(null)
   const [updateTask] = useUpdateTaskMutation()
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<Task>({
+    resolver: zodResolver(TaskSchema.strict().omit({ id: true }))
+  })
 
-  const handleSave = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (editingTask) {
+      setValue("title", editingTask.title);
+      setValue("description", editingTask.description);
+    }
+  }, [editingTask, setValue]);
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const updatedTask = {
       id: editingTask.id,
-      title: titleRef!.current!.value,
-      description: descriptionRef!.current!.value
+      title: data.title,
+      description: data. description
     }
-    const result = TaskSchema
-      .strict()
-      .safeParse(updatedTask);
-
-    // TODO: handle errors properly
-    if (result.success) {
-      dispatch(updateEditingTask(result.data))
-      updateTask(result.data)
-      handleClose()
-    } else {
-      console.log(result.error)
-      setShowAlert(true)
-    }
+    dispatch(updateEditingTask(updatedTask))
+    updateTask(updatedTask)
+    handleClose()
   }
 
   return (
@@ -61,28 +53,13 @@ export default function EditTaskDialog() {
           flexDirection: "column",
           gap:"4px"
         }}
-      > {showAlert &&
-          <Alert 
-            severity="error"
-            action={
-              <IconButton 
-                color="inherit" 
-                size="small"
-                onClick={handleCloseAlert}
-              >
-                <CloseIcon />
-              </IconButton>
-            }
-          >
-            Failed to update task
-          </Alert>
-        }
+      >
         <Box 
           sx={{
             margin: "8px"
           }}
         >  
-          <form noValidate autoComplete="off" id="form" onSubmit={handleSave}>
+          <form noValidate autoComplete="off" id="form" onSubmit={handleSubmit(onSubmit)}>
             <Box sx={{
               display: "flex",
               gap: "8px"
@@ -96,18 +73,20 @@ export default function EditTaskDialog() {
                 <TextField
                   label="Title"
                   defaultValue={editingTask.title}
-                  inputRef={titleRef}
                   name="title"
                   variant="outlined"
                   required
                   size='small'
                   fullWidth
-                  inputProps={{maxLength: "22"}}
+                  inputProps={{
+                    ...register("title", { required: true, maxLength: 22 }),
+                    "aria-invalid": errors.title ? "true" : "false"
+                  }}
                 />
+                {errors.title && <Alert severity="error">{errors.title?.message}</Alert>}
                 <TextField
                   label="Description"
                   defaultValue={editingTask.description}
-                  inputRef={descriptionRef}
                   name="description"
                   variant="outlined"
                   required
@@ -115,8 +94,12 @@ export default function EditTaskDialog() {
                   fullWidth
                   multiline
                   rows={4}
-                  inputProps={{maxLength: "80"}}
+                  inputProps={{
+                    ...register("description", { required: true, maxLength: 80 }),
+                    "aria-invalid": errors.description ? "true" : "false"
+                  }}
                 />
+                {errors.description && <Alert severity="error">{errors.description?.message}</Alert>}
               </Box>
             </Box>
           </form>
