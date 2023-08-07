@@ -75,7 +75,6 @@ export default function EditTaskDialog() {
                   defaultValue={editingTask.title}
                   name="title"
                   variant="outlined"
-                  required
                   size='small'
                   fullWidth
                   inputProps={{
@@ -89,7 +88,6 @@ export default function EditTaskDialog() {
                   defaultValue={editingTask.description}
                   name="description"
                   variant="outlined"
-                  required
                   size='small'
                   fullWidth
                   multiline
