@@ -4,7 +4,8 @@ import { Task } from '../../lib/utils'
 export type TasksState =  {
   tasks: Task[]
   editingTask: Task,
-  isEditingDialogOpen: boolean
+  isEditingDialogOpen: boolean,
+  searchingTerm: string
 }
 
 const tasksSlice = createSlice({
@@ -16,7 +17,8 @@ const tasksSlice = createSlice({
       title: "",
       description: ""
     },
-    isEditingDialogOpen: false
+    isEditingDialogOpen: false,
+    searchingTerm: "",
   } as TasksState,
   reducers: {
     updateTasksList: (state, action: PayloadAction<Task[]>) => {
@@ -27,10 +29,13 @@ const tasksSlice = createSlice({
     },
     toggleEditDialog: (state, action: PayloadAction<boolean>) => {
       state.isEditingDialogOpen = action.payload
+    },
+    updateSearchingTerm: (state, action: PayloadAction<string>) => {
+      state.searchingTerm = action.payload
     }
   }
 })
 
-export const { updateTasksList, updateEditingTask, toggleEditDialog } = tasksSlice.actions
+export const { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm } = tasksSlice.actions
 export const tasksReducer = tasksSlice.reducer
 

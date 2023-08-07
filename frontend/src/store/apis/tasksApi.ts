@@ -20,6 +20,9 @@ const tasksApi = createApi({
         },
         providesTags: ['Task']
       }),
+      searchTasks: builder.query({
+        query: (searchTerm: string) =>`/search/${searchTerm}`,
+      }),
       deleteTask: builder.mutation ({
         query: (taskId: string) => {
           return {
@@ -54,7 +57,7 @@ const tasksApi = createApi({
           }
         },
         invalidatesTags: ['Task']
-      })
+      }),
     }
   },
 })
@@ -63,6 +66,7 @@ export const {
   useFetchAllTasksQuery,
   useDeleteTaskMutation,
   useCreateTaskMutation,
-  useUpdateTaskMutation
+  useUpdateTaskMutation,
+  useSearchTasksQuery
 } = tasksApi
 export { tasksApi }

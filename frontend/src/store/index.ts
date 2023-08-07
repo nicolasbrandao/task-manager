@@ -4,7 +4,8 @@ import {
   tasksReducer,
   updateTasksList,
   updateEditingTask,
-  toggleEditDialog
+  toggleEditDialog,
+  updateSearchingTerm
 } from './slices/tasksSlice'
 import { tasksApi } from './apis/tasksApi'
 
@@ -23,11 +24,12 @@ setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 
-export { updateTasksList, updateEditingTask, toggleEditDialog }
+export { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm }
 
 export {
   useFetchAllTasksQuery,
   useDeleteTaskMutation,
   useCreateTaskMutation,
-  useUpdateTaskMutation
+  useUpdateTaskMutation,
+  useSearchTasksQuery
 } from './apis/tasksApi'
