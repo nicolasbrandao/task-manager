@@ -11,17 +11,12 @@ const tasksApi = createApi({
   tagTypes: ['Task'],
   endpoints(builder) {
     return {
-      fetchAllTasks: builder.query<Task[], void>({
-        query: () => {
-          return {
-            url: '/',
-            method: 'GET',
-          }
+      searchTasks: builder.query({
+        query: (searchTerm?: string) => {
+          if(!searchTerm) return "/"
+          return `/search/${searchTerm}`
         },
         providesTags: ['Task']
-      }),
-      searchTasks: builder.query({
-        query: (searchTerm: string) =>`/search/${searchTerm}`,
       }),
       deleteTask: builder.mutation ({
         query: (taskId: string) => {
@@ -63,7 +58,6 @@ const tasksApi = createApi({
 })
 
 export const {
-  useFetchAllTasksQuery,
   useDeleteTaskMutation,
   useCreateTaskMutation,
   useUpdateTaskMutation,
