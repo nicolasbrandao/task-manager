@@ -3,7 +3,7 @@ import AddTask from './components/AddTask'
 import Hero from './components/Hero'
 import TasksList from './components/TasksList'
 import EditTaskDialog from './components/EditTaskDialog'
-import { RootState, updateTasksList, useFetchAllTasksQuery, useSearchTasksQuery } from './store'
+import { RootState, updateTasksList, useSearchTasksQuery } from './store'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from './components/SearchBar'
 
@@ -16,8 +16,7 @@ function App() {
   const dispatch = useDispatch()
 
   // TODO: Check this
-  const fetchTasksData = searchingTerm.length > 0 ? useSearchTasksQuery : useFetchAllTasksQuery
-  const { data, isLoading, isError } = fetchTasksData(searchingTerm || undefined);
+  const { data, isLoading, isError } = useSearchTasksQuery(searchingTerm);
  
   if (data) dispatch(updateTasksList(data))
 
