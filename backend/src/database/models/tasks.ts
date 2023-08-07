@@ -23,14 +23,34 @@ export class TaskDAO {
 
   async list(): Promise<Task[]> {
     const snapshot = await collection.get<TaskCollection>();
-    const taskCollection = snapshot.val() ?? {};
-    console.log({ taskCollection });
+    const tasksCollection = snapshot.val() ?? {};
 
-    const tasks: Task[] = Object.entries(taskCollection).map(
+    const tasks: Task[] = Object.entries(tasksCollection).map(
       ([id, task]): Task => ({ id, ...task })
     );
 
     console.log({ tasks });
+    return tasks;
+  }
+
+  // TODO: check out search route
+  async search(searchTerm: string): Promise<Task[]> {
+    const tasksSnapshotArray = await db.query(COLLECTION_NAME)
+      .filter('title', 'like', `*${searchTerm}*`)
+      .get();
+
+    console.log('Searching for titles with: ', searchTerm)
+    console.log(tasksSnapshotArray)
+  
+    const tasks: Task[] = [];
+    tasksSnapshotArray.forEach((snapshot) => {
+      const taskData: Omit<Task, 'id'> | null = snapshot.val();
+      if (taskData) {
+        tasks.push({ id: snapshot.key, ...taskData });
+      }
+    });
+
+    console.log(tasks);
     return tasks;
   }
 

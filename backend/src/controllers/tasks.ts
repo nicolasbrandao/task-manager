@@ -5,7 +5,14 @@ export const taskController = Router()
 
 taskController
   .get('/', async (req, res) => {
+    // TODO: pagination
     const tasks = await task.list()
+    res.status(200).json(tasks)
+  })
+
+  .get('/search/:searchTerm', async (req, res) => {
+    // TODO: pagination
+    const tasks = await task.search(req.params.searchTerm)
     res.status(200).json(tasks)
   })
 
