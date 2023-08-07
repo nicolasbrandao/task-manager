@@ -8,19 +8,20 @@ export type TasksState =  {
   searchingTerm: string
 }
 
-// TODO: move initial state outside
+const initialState: TasksState = {
+  tasks: [],
+  editingTask: {
+    id: "",
+    title: "",
+    description: ""
+  },
+  isEditingDialogOpen: false,
+  searchingTerm: "",
+}
+
 const tasksSlice = createSlice({
   name: 'tasks',
-  initialState: {
-    tasks: [],
-    editingTask: {
-      id: "",
-      title: "",
-      description: ""
-    },
-    isEditingDialogOpen: false,
-    searchingTerm: "",
-  } as TasksState,
+  initialState,
   reducers: {
     updateTasksList: (state, action: PayloadAction<Task[]>) => {
       state.tasks = action.payload
@@ -37,6 +38,11 @@ const tasksSlice = createSlice({
   }
 })
 
-export const { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm } = tasksSlice.actions
+export const {
+  updateTasksList,
+  updateEditingTask,
+  toggleEditDialog,
+  updateSearchingTerm
+} = tasksSlice.actions
 export const tasksReducer = tasksSlice.reducer
 
