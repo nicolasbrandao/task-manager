@@ -27,7 +27,6 @@ export type RootState = ReturnType<typeof store.getState>
 export { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm }
 
 export {
-  useFetchAllTasksQuery,
   useDeleteTaskMutation,
   useCreateTaskMutation,
   useUpdateTaskMutation,
