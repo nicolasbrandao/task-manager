@@ -27,10 +27,8 @@ export default function EditTaskDialog() {
   })
 
   useEffect(() => {
-    if (editingTask) {
-      setValue("title", editingTask.title);
-      setValue("description", editingTask.description);
-    }
+    setValue("title", editingTask.title);
+    setValue("description", editingTask.description);
   }, [editingTask, setValue]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
