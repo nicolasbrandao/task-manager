@@ -6,9 +6,10 @@ import InfoIcon from '@mui/icons-material/Info';
 
 
 export default function TasksList() {
-  const { tasks } = useSelector((state: RootState) => {
+  const { tasks, searchingTerm } = useSelector((state: RootState) => {
     return {
-      tasks: state.tasks.tasks
+      tasks: state.tasks.tasks,
+      searchingTerm: state.tasks.searchingTerm
     }
   })
 
@@ -17,12 +18,18 @@ export default function TasksList() {
     : (
         <Box sx={{
           display: "flex",
+          gap:"4px",
+          justifyContent: "center",
           color: "primary.main",
           margin: "8px",
-          gap:"4px"
         }}>
           <InfoIcon />
-          <Typography>Create a task using the input fields above</Typography>
+          <Typography>
+            {searchingTerm 
+              ? "No titles match the search query"
+              : "Create a task using the input fields above"
+            }
+            </Typography>
         </Box>
       )
   return (
