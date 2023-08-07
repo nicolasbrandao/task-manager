@@ -4,6 +4,7 @@ import { TaskSchema, task } from "../database/models/tasks"
 export const taskController = Router()
 
 taskController
+  // TODO: remove serch action use only this
   .get('/', async (req, res) => {
     // TODO: pagination
     const tasks = await task.list()

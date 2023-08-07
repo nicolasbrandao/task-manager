@@ -13,7 +13,6 @@ const theme = createTheme({
       dark: "#ff6201",
     },
   },
-
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

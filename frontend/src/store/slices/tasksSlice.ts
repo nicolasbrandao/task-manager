@@ -8,6 +8,7 @@ export type TasksState =  {
   searchingTerm: string
 }
 
+// TODO: move initial state outside
 const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
