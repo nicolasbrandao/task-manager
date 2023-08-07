@@ -58,9 +58,9 @@ const tasksApi = createApi({
 })
 
 export const {
+  useSearchTasksQuery,
   useDeleteTaskMutation,
   useCreateTaskMutation,
-  useUpdateTaskMutation,
-  useSearchTasksQuery
+  useUpdateTaskMutation
 } = tasksApi
 export { tasksApi }
