@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Task } from '../../lib/utils'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Task } from "../../lib/utils";
 
 export type TasksState =  {
   tasks: Task[]
@@ -17,32 +17,32 @@ const initialState: TasksState = {
   },
   isEditingDialogOpen: false,
   searchingTerm: "",
-}
+};
 
 const tasksSlice = createSlice({
-  name: 'tasks',
+  name: "tasks",
   initialState,
   reducers: {
     updateTasksList: (state, action: PayloadAction<Task[]>) => {
-      state.tasks = action.payload
+      state.tasks = action.payload;
     },
     updateEditingTask: (state, action: PayloadAction<Task>) => {
-      state.editingTask = action.payload
+      state.editingTask = action.payload;
     },
     toggleEditDialog: (state, action: PayloadAction<boolean>) => {
-      state.isEditingDialogOpen = action.payload
+      state.isEditingDialogOpen = action.payload;
     },
     updateSearchingTerm: (state, action: PayloadAction<string>) => {
-      state.searchingTerm = action.payload
+      state.searchingTerm = action.payload;
     }
   }
-})
+});
 
 export const {
   updateTasksList,
   updateEditingTask,
   toggleEditDialog,
   updateSearchingTerm
-} = tasksSlice.actions
-export const tasksReducer = tasksSlice.reducer
+} = tasksSlice.actions;
+export const tasksReducer = tasksSlice.reducer;
 

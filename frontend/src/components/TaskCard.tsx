@@ -1,8 +1,8 @@
 import { Box, IconButton, ListItemText, MenuItem, Tooltip, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Task } from "../lib/utils";
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import { useDispatch } from 'react-redux'
-import EditIcon from '@mui/icons-material/Edit';
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { useDispatch } from "react-redux";
+import EditIcon from "@mui/icons-material/Edit";
 import { toggleEditDialog, updateEditingTask, useDeleteTaskMutation } from "../store";
 import { MouseEventHandler } from "react";
 
@@ -11,34 +11,35 @@ type Props = {
 }
 
 export default function TaskCard({ task }: Props) {
-  const theme = useTheme()
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleEditTask = (task: Task) => {
-    dispatch(updateEditingTask(task))
-    dispatch(toggleEditDialog(true))
-  }
+    dispatch(updateEditingTask(task));
+    dispatch(toggleEditDialog(true));
+  };
 
-  const [deleteTask] = useDeleteTaskMutation()
+  const [deleteTask] = useDeleteTaskMutation();
 
   const handleRemoveTask: MouseEventHandler<HTMLButtonElement> = (event) => {
-    deleteTask(task.id)
+    deleteTask(task.id);
     event.stopPropagation();
-  }
+  };
 
   return (
     <MenuItem onClick={() => handleEditTask(task)}>
       <ListItemText primary={task.title} />
-      <Typography 
+      <Typography
+        noWrap
         sx={{
           display: `${isSmallScreen && "none"}`,
           marginRight: "16px",
           color: "grey.400",
           maxWidth: "50%"
         }}
-        noWrap>{task.description}</Typography>
+      >{task.description}</Typography>
       <Box>
         <Tooltip title="Edit task">
           <IconButton aria-label="edit task" onClick={() => handleEditTask(task)}>
@@ -60,5 +61,5 @@ export default function TaskCard({ task }: Props) {
         </Tooltip>
       </Box>
     </MenuItem>
-  )
+  );
 }

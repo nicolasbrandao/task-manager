@@ -1,4 +1,4 @@
-import { Handler } from "express"
+import { type Handler } from "express";
 
 const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
@@ -13,6 +13,6 @@ const formatDate = (timestamp: number) => {
 };
 
 export const timeLogger: Handler = (_req, _res, next) => {
-  console.log('Time: ', formatDate(Date.now()))
-  next()
-}
+  console.log("Time: ", formatDate(Date.now()));
+  next();
+};

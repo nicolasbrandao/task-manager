@@ -1,13 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/query'
+import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import {
   tasksReducer,
   updateTasksList,
   updateEditingTask,
   toggleEditDialog,
   updateSearchingTerm
-} from './slices/tasksSlice'
-import { tasksApi } from './apis/tasksApi'
+} from "./slices/tasksSlice";
+import { tasksApi } from "./apis/tasksApi";
 
 export const store = configureStore({
   reducer: {
@@ -16,19 +16,19 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
-      .concat(tasksApi.middleware)
+      .concat(tasksApi.middleware);
   },
-})
+});
 
-setupListeners(store.dispatch)
+setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>
 
-export { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm }
+export { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm };
 
 export {
   useDeleteTaskMutation,
   useCreateTaskMutation,
   useUpdateTaskMutation,
   useSearchTasksQuery
-} from './apis/tasksApi'
+} from "./apis/tasksApi";
