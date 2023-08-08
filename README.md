@@ -112,14 +112,3 @@ Format files with ESLint:
 ```bash
   pnpm format
 ```
-
-
-## 👥 Contribution
-
-If you'd like to contribute with to project, simply open up an issue or Pull Request.
-
-
-## 🔑 License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
