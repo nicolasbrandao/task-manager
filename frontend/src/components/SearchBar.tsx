@@ -1,23 +1,42 @@
 import { Box, Paper, TextField } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch } from "react-redux";
-import { updateSearchingTerm } from "../store";
-import { ChangeEvent } from "react";
-import InputAdornment from '@mui/material/InputAdornment';
-import debounce from 'lodash.debounce'
+import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, updateSearchingTerm } from "../store";
+import { ChangeEvent, FormEvent } from "react";
+import InputAdornment from "@mui/material/InputAdornment";
+import debounce from "lodash.debounce";
+import { useQuery } from "../hooks/useQuery";
+import { useSearchParams } from "react-router-dom";
 
-const DEBOUNCE_DELAY = 300 // ms
+const DEBOUNCE_DELAY = 300; // ms
 
 export default function SearchBar() {
+  const { searchingTerm } = useSelector((state: RootState) => {
+    return {
+      searchingTerm: state.tasks.searchingTerm
+    };
+  });
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const [, setSearchParams ] = useSearchParams();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateSearchingTerm(e.target.value))
-  }
+    const searchQueryObject = {
+      q: e.target.value
+    };
+    dispatch(updateSearchingTerm(searchQueryObject.q));
+    setSearchParams(searchQueryObject);
+  };
+
+  const query = useQuery();
+  query.set("q",searchingTerm);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
-    <Paper 
+    <Paper
       sx={{
         margin: "8px"
       }}
@@ -27,45 +46,49 @@ export default function SearchBar() {
         display: "flex",
         flexDirection: "column",
         gap: "8px"
-      }}>
-        <form autoComplete="off">
+      }}
+      >
+        <form autoComplete="off" onSubmit={handleSubmit}>
           <Box sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             gap: "8px"
-          }}>
+          }}
+          >
             <Box sx={{
               display: "flex",
               flexDirection: "column",
               gap: "8px",
               width: "100%",
-            }}>
+            }}
+            >
               <TextField
-                onChange={debounce(handleChange, DEBOUNCE_DELAY)}
-                variant="outlined"
-                size='small'
-                fullWidth
-                inputProps={{
-                  maxLength: "22",
-                }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <SearchIcon 
+                      <SearchIcon
                         fontSize="inherit"
                         sx={{
                           color: "primary.main",
                         }}
                       />
-                  </InputAdornment>
-                  )
+                    </InputAdornment>
+                  ),
+                  name: "q"
                 }}
+                fullWidth
+                inputProps={{
+                  maxLength: "22",
+                }}
+                onChange={debounce(handleChange, DEBOUNCE_DELAY)}
+                size='small'
+                variant="outlined"
               />
             </Box>
           </Box>
         </form>
       </Box>
     </Paper>
-  )
+  );
 }

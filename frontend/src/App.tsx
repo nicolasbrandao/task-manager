@@ -1,27 +1,38 @@
-import { Alert, Box, CircularProgress } from '@mui/material'
-import AddTask from './components/AddTask'
-import Hero from './components/Hero'
-import TasksList from './components/TasksList'
-import EditTaskDialog from './components/EditTaskDialog'
-import { RootState, updateTasksList, useSearchTasksQuery } from './store'
-import { useDispatch, useSelector } from 'react-redux'
-import SearchBar from './components/SearchBar'
+import { Alert, Box, CircularProgress } from "@mui/material";
+import AddTask from "./components/AddTask";
+import Hero from "./components/Hero";
+import TasksList from "./components/TasksList";
+import EditTaskDialog from "./components/EditTaskDialog";
+import { RootState, updateSearchingTerm, updateTasksList, useSearchTasksQuery } from "./store";
+import { useDispatch, useSelector } from "react-redux";
+import SearchBar from "./components/SearchBar";
+import { useEffect } from "react";
+import { z } from "zod";
+import { useQuery } from "./hooks/useQuery";
 
 function App() {
   const  { searchingTerm } = useSelector((state: RootState) => {
     return {
       searchingTerm: state.tasks.searchingTerm
-    }
+    };
   });
-  const dispatch = useDispatch()
 
-  // TODO: Check this
+  const dispatch = useDispatch();
+
+  const query = useQuery();
+  const searchParam = query.get("q") ?? "";
+
+  useEffect(() => {
+    const parsedParam = z.string().default("").parse(searchParam);
+    dispatch(updateSearchingTerm(parsedParam as string));
+  }, [dispatch, searchParam]);
+
   const { data, isLoading, isError } = useSearchTasksQuery(searchingTerm);
- 
-  if (data) dispatch(updateTasksList(data))
+
+  if (data) dispatch(updateTasksList(data));
 
   return (
-    <Box 
+    <Box
       sx={{
         maxWidth: "1000px",
         minWidth: "380px",
@@ -35,14 +46,17 @@ function App() {
       <Hero />
       <AddTask />
       <SearchBar />
-        {isError && <Alert severity="error">Error fetching tasks</Alert>}
-        {isLoading
-          ? <CircularProgress variant={"indeterminate"} size={80} sx={{ margin: "2000px auto"}}/>
-          : <TasksList />
-        }
+      {isError && <Alert severity="error" sx={{ margin: "8px" }}>Error fetching tasks</Alert>}
+      {isLoading ?
+        <CircularProgress
+          size={80}
+          sx={{ margin: "200px auto"}}
+          variant={"indeterminate"}
+        />
+        : <TasksList />}
       <EditTaskDialog />
     </Box>
-  )
+  );
 }
 
-export default App
+export default App;
