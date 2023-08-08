@@ -6,8 +6,8 @@ export const taskController = Router();
 
 taskController
   .get("/", async (req, res) => {
-    const query = z.string().default("").parse(req.query.q)
-    const tasks = await task.search(query)
+    const query = z.string().default("").parse(req.query.q);
+    const tasks = await task.search(query);
     res.status(200).json(tasks);
   })
 
