@@ -1,66 +1,70 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { Task } from '../../lib/utils'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Task } from "../../lib/utils";
 
-const URL = import.meta.env.VITE_TASKS_BASE_URL
+const URL = import.meta.env.VITE_TASKS_BASE_URL;
 
 const tasksApi = createApi({
-  reducerPath: 'tasksApi',
+  reducerPath: "tasksApi",
   baseQuery: fetchBaseQuery({
     baseUrl: URL,
   }),
-  tagTypes: ['Task'],
+  tagTypes: ["Task"],
   endpoints(builder) {
     return {
       searchTasks: builder.query({
-        query: (searchTerm?: string) => {
-          if(!searchTerm) return "/"
-          return `/search/${searchTerm}`
+        query: (searchTerm = "") => {
+          return {
+            url: "/",
+            params: {
+              q: searchTerm
+            }
+          };
         },
-        providesTags: ['Task']
+        providesTags: ["Task"]
       }),
       deleteTask: builder.mutation ({
         query: (taskId: string) => {
           return {
             url: `/${taskId}`,
-            method: 'DELETE',
-          }
+            method: "DELETE",
+          };
         },
-        invalidatesTags: ['Task']
+        invalidatesTags: ["Task"]
       }),
       createTask: builder.mutation ({
         query: (task: Omit<Task, "id">) => {
           return {
-            url: '/',
-            method: 'POST',
+            url: "/",
+            method: "POST",
             body: {
               title: task.title,
               description: task.description
             }
-          }
+          };
         },
-        invalidatesTags: ['Task']
+        invalidatesTags: ["Task"]
       }),
       updateTask: builder.mutation ({
         query: (task: Task) => {
           return {
             url: `/${task.id}`,
-            method: 'PUT',
+            method: "PUT",
             body: {
               title: task.title,
               description: task.description
             }
-          }
+          };
         },
-        invalidatesTags: ['Task']
+        invalidatesTags: ["Task"]
       }),
-    }
+    };
   },
-})
+});
 
 export const {
   useSearchTasksQuery,
   useDeleteTaskMutation,
   useCreateTaskMutation,
   useUpdateTaskMutation
-} = tasksApi
-export { tasksApi }
+} = tasksApi;
+export { tasksApi };
