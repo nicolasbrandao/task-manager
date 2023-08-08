@@ -44,7 +44,8 @@ All the application was developed with TypeScript
 - Vite
     - React
         - Redux & Redux Toolkit
-        - React Hook Forma
+        - React Hook Form
+        - React Router DOM
         - Zod
         - Lodash
             - Debounce
@@ -58,7 +59,7 @@ All the application was developed with TypeScript
 
 ## 🔢 Environment Variables
 
-This web app needs three Environment Variables:
+This web app two three Environment Variables. Create a `.env` file at the root of `/backend` and `/frontend` with the following vars:
 
 **Front-end(.env)**
 ```bash
@@ -91,7 +92,7 @@ Run local server:
 
 Format files with ESLint:
 ```bash
-  pnpm run format
+  pnpm format
 ```
 
 **Go to the frontend folder:**
@@ -109,7 +110,7 @@ Run local server:
 
 Format files with ESLint:
 ```bash
-  pnpm run format
+  pnpm format
 ```
 
 
