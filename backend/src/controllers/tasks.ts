@@ -1,23 +1,17 @@
-import { Router, Response } from "express"
-import { TaskSchema, task } from "../database/models/tasks"
+import { Router, type Response } from "express";
+import { TaskSchema, task } from "../database/models/tasks";
+import { z } from "zod";
 
-export const taskController = Router()
+export const taskController = Router();
 
 taskController
-  // TODO: remove serch action use only this
-  .get('/', async (req, res) => {
-    // TODO: pagination
-    const tasks = await task.list()
-    res.status(200).json(tasks)
+  .get("/", async (req, res) => {
+    const query = z.string().default("").parse(req.query.q)
+    const tasks = await task.search(query)
+    res.status(200).json(tasks);
   })
 
-  .get('/search/:searchTerm', async (req, res) => {
-    // TODO: pagination
-    const tasks = await task.search(req.params.searchTerm)
-    res.status(200).json(tasks)
-  })
-
-  .post('/', async (req, res) => {
+  .post("/", async (req, res) => {
     const result = TaskSchema
       .strict()
       .omit({ id: true })
@@ -28,19 +22,19 @@ taskController
       return res.status(400).json(result.error);
     }
 
-    const { title, description } = req.body
-    await task.create({ description, title })
-    noContentResponse(res)
+    const { title, description } = req.body;
+    await task.create({ description, title });
+    noContentResponse(res);
   })
 
-  .delete('/:id', async (req, res) => {
-    await task.delete(req.params.id)
-    noContentResponse(res)
+  .delete("/:id", async (req, res) => {
+    await task.delete(req.params.id);
+    noContentResponse(res);
   })
 
-  .put('/:id', async (req, res) => {
-    const { id } = req.params
-    const { title, description } = req.body
+  .put("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { title, description } = req.body;
 
     const result = TaskSchema
       .strict()
@@ -51,8 +45,8 @@ taskController
       return res.status(400).json(result.error);
     }
 
-    await task.update(result.data)
-    noContentResponse(res)
-  })
+    await task.update(result.data);
+    noContentResponse(res);
+  });
 
-const noContentResponse = (res: Response) => res.status(201).end()
+const noContentResponse = (res: Response) => res.status(201).end();
