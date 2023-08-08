@@ -14,7 +14,7 @@
 <br>
 
 <p align="center">
-  <img alt="Task Manager Thumbnail" src="./src/assets/project_thumbnail.png" width="100%" />
+  <img alt="Task Manager Thumbnail" src="./frontend/assets/project_thumbnail.png" width="100%" />
 </p>
 
 
