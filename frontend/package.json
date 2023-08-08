@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "pnpm lint --fix",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -21,14 +22,17 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
     "react-redux": "^8.1.2",
+    "react-router-dom": "^6.14.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {
     "@mui/types": "^7.2.4",
     "@mui/utils": "^5.14.3",
+    "@podcodar/eslint-config-react": "^1.6.0",
     "@types/lodash.debounce": "^4.0.7",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
