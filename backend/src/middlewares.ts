@@ -1,6 +1,6 @@
 import { type Handler } from "express";
 
-const formatDate = (timestamp: number) => {
+const formatDate = (timestamp: number): string => {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -12,7 +12,7 @@ const formatDate = (timestamp: number) => {
   return `${month}-${day}-${year} ${hours}:${minutes}:${seconds}`;
 };
 
-export const timeLogger: Handler = (_req, _res, next) => {
+export const timeLogger: Handler = (_req, _res, next): void => {
   console.log("Time: ", formatDate(Date.now()));
   next();
 };
