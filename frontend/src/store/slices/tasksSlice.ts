@@ -45,4 +45,3 @@ export const {
   updateSearchingTerm
 } = tasksSlice.actions;
 export const tasksReducer = tasksSlice.reducer;
-
