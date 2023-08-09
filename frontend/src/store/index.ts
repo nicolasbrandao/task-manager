@@ -2,10 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import {
   tasksReducer,
-  updateTasksList,
   updateEditingTask,
   toggleEditDialog,
-  updateSearchingTerm
 } from "./slices/tasksSlice";
 import { tasksApi } from "./apis/tasksApi";
 
@@ -24,7 +22,7 @@ setupListeners(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>
 
-export { updateTasksList, updateEditingTask, toggleEditDialog, updateSearchingTerm };
+export { updateEditingTask, toggleEditDialog };
 
 export {
   useDeleteTaskMutation,
