@@ -21,7 +21,7 @@ export default function TasksList() {
       margin: "8px"
     }}
     >
-      <MenuList>
+      <MenuList sx={{display: "flex", flexDirection: "column"}}>
         {isError && <Alert severity="error" sx={{ margin: "8px" }}>Error fetching tasks</Alert>}
         {isLoading ?
           <CircularProgress
@@ -29,7 +29,7 @@ export default function TasksList() {
             sx={{ margin: "200px auto"}}
             variant={"indeterminate"}
           />
-          : content}
+          :content}
       </MenuList>
     </Paper>
   );
