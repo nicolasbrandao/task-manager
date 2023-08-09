@@ -6,7 +6,7 @@ import { timeLogger } from "./middlewares";
 import cors from "cors";
 
 const app = express();
-const port = 3000;
+const port = 8080;
 
 // middlewares
 // TODO: config cors

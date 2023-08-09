@@ -5,7 +5,7 @@ services:
     build:
       context: .
     ports:
-      - "3000:3000" # backend
+      - "8080:8080" # backend
       - "5173:5173" # frontend
     volumes:
       - .:/app
