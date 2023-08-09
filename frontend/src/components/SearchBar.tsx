@@ -63,11 +63,11 @@ export default function SearchBar() {
                   ),
                   name: "q",
                 }}
-                label="Search"
                 fullWidth
                 inputProps={{
                   maxLength: "22",
                 }}
+                label="Search"
                 onChange={debounce(handleChange, DEBOUNCE_DELAY)}
                 size='small'
                 variant="outlined"
