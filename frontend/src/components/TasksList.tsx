@@ -1,16 +1,17 @@
-import { RootState } from "../store";
 import TaskCard from "./TaskCard";
 import { Box, MenuList, Paper, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
 import InfoIcon from "@mui/icons-material/Info";
+import { useQuery } from "../hooks/useQuery";
+import { Task } from "../lib/utils";
 
-export default function TasksList() {
-  const { tasks, searchingTerm } = useSelector((state: RootState) => {
-    return {
-      tasks: state.tasks.tasks,
-      searchingTerm: state.tasks.searchingTerm
-    };
-  });
+type Props = {
+  tasks: Task[]
+}
+
+export default function TasksList({ tasks }: Props) {
+
+  const query = useQuery();
+  const searchParam = query.get("q") ?? "";
 
   const content = tasks.length > 0
     ? tasks.map(task => <TaskCard key={task.id} task={task} />)
@@ -25,7 +26,7 @@ export default function TasksList() {
       >
         <InfoIcon />
         <Typography>
-          {searchingTerm
+          {searchParam
             ? "No titles match the search query"
             : "Create a task using the input fields above"
           }

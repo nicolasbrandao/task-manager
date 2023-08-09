@@ -1,35 +1,21 @@
 import { Box, Paper, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState, updateSearchingTerm } from "../store";
 import { ChangeEvent, FormEvent } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import debounce from "lodash.debounce";
-import { useQuery } from "../hooks/useQuery";
 import { useSearchParams } from "react-router-dom";
 
 const DEBOUNCE_DELAY = 300; // ms
 
 export default function SearchBar() {
-  const { searchingTerm } = useSelector((state: RootState) => {
-    return {
-      searchingTerm: state.tasks.searchingTerm
-    };
-  });
-
-  const dispatch = useDispatch();
   const [, setSearchParams ] = useSearchParams();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchQueryObject = {
       q: e.target.value
     };
-    dispatch(updateSearchingTerm(searchQueryObject.q));
     setSearchParams(searchQueryObject);
   };
-
-  const query = useQuery();
-  query.set("q",searchingTerm);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
