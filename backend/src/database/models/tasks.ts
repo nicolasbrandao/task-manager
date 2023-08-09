@@ -1,10 +1,10 @@
-import { z } from "zod";
 import { db } from "../db";
+import { z } from "zod";
 
 export const TaskSchema = z.object({
   id: z.string(),
-  title: z.string(),
-  description: z.string(),
+  title: z.string().min(1).max(22),
+  description: z.string().min(1).max(80),
 });
 
 type Task = z.infer<typeof TaskSchema>;

@@ -2,7 +2,7 @@ import TaskCard from "./TaskCard";
 import { Box, MenuList, Paper, Typography } from "@mui/material";
 import InfoIcon from "@mui/icons-material/Info";
 import { useQuery } from "../hooks/useQuery";
-import { Task } from "../lib/utils";
+import { Task } from "../entities/task";
 
 type Props = {
   tasks: Task[]

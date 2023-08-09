@@ -2,7 +2,6 @@ import { Alert, Box, CircularProgress } from "@mui/material";
 import AddTask from "./components/AddTask";
 import Hero from "./components/Hero";
 import TasksList from "./components/TasksList";
-import EditTaskDialog from "./components/EditTaskDialog";
 import { useSearchTasksQuery } from "./store";
 import SearchBar from "./components/SearchBar";
 import { useQuery } from "./hooks/useQuery";
@@ -34,7 +33,6 @@ function App() {
           variant={"indeterminate"}
         />
         : <TasksList tasks={data}/>}
-      <EditTaskDialog />
     </Box>
   );
 }

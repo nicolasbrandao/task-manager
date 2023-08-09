@@ -1,7 +1,7 @@
 import { Alert, Box, IconButton, TextField, Tooltip } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { useCreateTaskMutation } from "../store";
-import { Task, TaskSchema } from "../lib/utils";
+import { Task, TaskSchema } from "../entities/task";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 

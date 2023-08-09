@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */ // TODO: check out this error
 import { Router, type Response, type Request } from "express";
 import { TaskSchema, task } from "../database/models/tasks";
 import { z } from "zod";

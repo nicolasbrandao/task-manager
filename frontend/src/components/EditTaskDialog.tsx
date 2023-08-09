@@ -1,34 +1,24 @@
 import { Dialog, DialogTitle, Button, Box, TextField, DialogActions, DialogContent, Alert } from "@mui/material";
-import { RootState, toggleEditDialog, updateEditingTask, useUpdateTaskMutation } from "../store";
-import { useSelector, useDispatch } from "react-redux";
-import { Task, TaskSchema } from "../lib/utils";
+import { useUpdateTaskMutation } from "../store";
+import { Task, TaskSchema } from "../entities/task";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
 
-export default function EditTaskDialog() {
-  const { isEditingDialogOpen, editingTask } = useSelector((state: RootState) => {
-    return {
-      isEditingDialogOpen: state.tasks.isEditingDialogOpen,
-      editingTask: state.tasks.editingTask
-    };
-  });
+type Props = {
+  editingTask: Task,
+  isEditingDialogOpen: boolean,
+  handleClose: () => void
+}
 
-  const dispatch = useDispatch();
-
-  const handleClose = () => {
-    dispatch(toggleEditDialog(false));
-  };
-
+export default function EditTaskDialog({ editingTask, isEditingDialogOpen, handleClose }: Props) {
   const [updateTask] = useUpdateTaskMutation();
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<Task>({
-    resolver: zodResolver(TaskSchema.strict().omit({ id: true }))
+  const { register, handleSubmit, formState: { errors } } = useForm<Task>({
+    resolver: zodResolver(TaskSchema.strict().omit({ id: true })),
+    defaultValues: {
+      title: editingTask.title,
+      description: editingTask.description
+    }
   });
-
-  useEffect(() => {
-    setValue("title", editingTask.title);
-    setValue("description", editingTask.description);
-  }, [editingTask, setValue]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const updatedTask = {
@@ -36,7 +26,6 @@ export default function EditTaskDialog() {
       title: data.title,
       description: data. description
     };
-    dispatch(updateEditingTask(updatedTask));
     updateTask(updatedTask);
     handleClose();
   };
@@ -75,7 +64,6 @@ export default function EditTaskDialog() {
               }}
               >
                 <TextField
-                  defaultValue={editingTask.title}
                   fullWidth
                   inputProps={{
                     ...register("title", { required: true, maxLength: 22 }),
@@ -88,7 +76,6 @@ export default function EditTaskDialog() {
                 />
                 {errors.title && <Alert severity="error">{errors.title?.message}</Alert>}
                 <TextField
-                  defaultValue={editingTask.description}
                   fullWidth
                   inputProps={{
                     ...register("description", { required: true, maxLength: 80 }),
