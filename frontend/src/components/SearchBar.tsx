@@ -61,8 +61,9 @@ export default function SearchBar() {
                       />
                     </InputAdornment>
                   ),
-                  name: "q"
+                  name: "q",
                 }}
+                label="Search"
                 fullWidth
                 inputProps={{
                   maxLength: "22",
