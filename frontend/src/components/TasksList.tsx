@@ -5,10 +5,10 @@ import { useQuery } from "../hooks/useQuery";
 import { Task } from "../entities/task";
 
 type Props = {
-  tasks: Task[]
+  tasks?: Task[]
 }
 
-export default function TasksList({ tasks }: Props) {
+export default function TasksList({ tasks = [] }: Props) {
 
   const query = useQuery();
   const searchParam = query.get("q") ?? "";
