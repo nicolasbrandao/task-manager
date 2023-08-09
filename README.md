@@ -8,7 +8,7 @@
   <a href="#-tech-stack">Tech Stack</a>&nbsp;|&nbsp;
   <a href="#-structure">Structure</a>&nbsp;|&nbsp;
   <a href="#-api">API Endpoints</a>&nbsp;|&nbsp;
-  <a href="#--model">Model</a>&nbsp;|&nbsp;
+  <a href="#-Model">Model</a>&nbsp;|&nbsp;
   <a href="#-environment-variables">Environment Variables</a>&nbsp;|&nbsp;
   <a href="#-installing-and-local-development">Installing and Local Development</a>
 </p>
