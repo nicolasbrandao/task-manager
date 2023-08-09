@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+    ports:
+      - "3000:3000" # backend
+      - "5173:5173" # frontend
+    volumes:
+      - .:/app
+      - /app/backend/node_modules
+      - /app/frontend/node_modules
