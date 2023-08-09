@@ -42,7 +42,8 @@ export default function AddTask() {
               fullWidth
               inputProps={{
                 ...register("title", { required: true, maxLength: 22 }),
-                "aria-invalid": errors.title ? "true" : "false"
+                "aria-invalid": errors.title ? "true" : "false",
+                maxLength: "22",
               }}
               label="Title"
               size='small'
@@ -53,7 +54,8 @@ export default function AddTask() {
               fullWidth
               inputProps={{
                 ...register("description", { required: true, maxLength: 80 }),
-                "aria-invalid": errors.description ? "true" : "false"
+                "aria-invalid": errors.description ? "true" : "false",
+                maxLength: "80",
               }}
               label="Description"
               multiline
