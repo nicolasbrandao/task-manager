@@ -4,13 +4,13 @@
 <p align="center">
   <a href="#-description">Description</a>&nbsp;|&nbsp;
   <a href="#-deploy">Deploy</a>&nbsp;|&nbsp;
-  <a href="#-how-to-use">How To Use</a>&nbsp;|&nbsp;
+  <a href="#-usage">Usage</a>&nbsp;|&nbsp;
   <a href="#-tech-stack">Tech Stack</a>&nbsp;|&nbsp;
   <a href="#-structure">Structure</a>&nbsp;|&nbsp;
-  <a href="#-api-endpoints">API Endpoints</a>&nbsp;|&nbsp;
+  <a href="#-api">API Endpoints</a>&nbsp;|&nbsp;
   <a href="#-model">Model</a>&nbsp;|&nbsp;
   <a href="#-environment-variables">Environment Variables</a>&nbsp;|&nbsp;
-  <a href="#-install-and-local-development">Installing and Local Development</a>&nbsp;|&nbsp;
+  <a href="#-installing-and-local-development">Installing and Local Development</a>
 </p>
 
 <br>
@@ -29,19 +29,21 @@ Task Manager is a user-friendly task manager app that helps you create, edit, re
 
 - [Click here](https://task-manager-nicolasbrandao.vercel.app/) to go the live demo
 
+**Connection with the back-end might take a few seconds on the first try**
 
-## ⚙️ How To Use
 
-- Create a new task:
+## ⚙️ Usage
+
+- Create a new task
   - Create a new task by just filling up the input forms `Title` and `Description` and clicking on the `+` button
   - Title and Description are required
   - Title has maximum characters limit of 22 and description of 80
 - Edit an existing task
-  - Edit tasks by clink on the pencil icon and changing the fields
+  - Edit tasks by clicking on the pencil icon and changing the fields
   - Save the changes to the DB clicking on save
 - Remove an existing task
   - Simply click on the remove icon to remove a task
-- Search tasks by title matching
+- Search tasks
   - Search for a task by just typing your query into the searching field
   - The search is done by matching the query and tasks titles
 
@@ -69,11 +71,11 @@ Task Manager is a user-friendly task manager app that helps you create, edit, re
 
 ## 🧩 Structure
 <p align="center">
-  <img alt="Task Manager Thumbnail" src="./frontend/assets/project_thumbnail.png" width="100%" />
+  <img alt="Task Manager Thumbnail" src="./frontend/assets/architecture.png" width="100%" />
 </p>
 
 
-## 📡 API Endpoins
+## 📡 API
 ### GET /tasks/
 Retrieves a list of tasks based on the provided query parameter.
 
@@ -152,7 +154,7 @@ Updates a task based on its ID.
 Status Code: 201 (Created) if successful, 400 (Bad Request) if request body validation fails.
 Response Body: None (empty response body on success).
 
-## Model
+## 🗄️ Model
 The TaskDAO class provides methods for interacting with task data in a consistent and organized manner. It serves as the Model component in the Model-View-Controller (MVC) architecture for the project. This class allows you to manage tasks stored in the database with clear CRUD (Create, Read, Update, Delete) operations.
 
 ### Create `create(task)`
