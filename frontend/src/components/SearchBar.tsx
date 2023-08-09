@@ -67,7 +67,6 @@ export default function SearchBar() {
                 inputProps={{
                   maxLength: "22",
                 }}
-                label="Search"
                 onChange={debounce(handleChange, DEBOUNCE_DELAY)}
                 size='small'
                 variant="outlined"

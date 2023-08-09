@@ -67,10 +67,9 @@ export default function EditTaskDialog({ editingTask, isEditingDialogOpen, handl
                   fullWidth
                   inputProps={{
                     ...register("title", { required: true, maxLength: 22 }),
-                    "aria-invalid": errors.title ? "true" : "false"
                   }}
-                  label="Title"
-                  name="title"
+                  label='Title'
+                  onKeyDown={e => e.stopPropagation()}
                   size='small'
                   variant="outlined"
                 />
@@ -79,11 +78,10 @@ export default function EditTaskDialog({ editingTask, isEditingDialogOpen, handl
                   fullWidth
                   inputProps={{
                     ...register("description", { required: true, maxLength: 80 }),
-                    "aria-invalid": errors.description ? "true" : "false"
                   }}
-                  label="Description"
+                  label='Description'
                   multiline
-                  name="description"
+                  onKeyDown={e => e.stopPropagation()}
                   rows={4}
                   size='small'
                   variant="outlined"
