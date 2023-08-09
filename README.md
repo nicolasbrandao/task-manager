@@ -8,12 +8,10 @@
   <a href="#-tech-stack">Tech Stack</a>&nbsp;|&nbsp;
   <a href="#-structure">Structure</a>&nbsp;|&nbsp;
   <a href="#-api">API Endpoints</a>&nbsp;|&nbsp;
-  <a href="#-model">Model</a>&nbsp;|&nbsp;
+  <a href="#model">Model</a>&nbsp;|&nbsp;
   <a href="#-environment-variables">Environment Variables</a>&nbsp;|&nbsp;
   <a href="#-installing-and-local-development">Installing and Local Development</a>
 </p>
-
-[Model](#-model)&nbsp;|&nbsp;
 
 <br>
 
@@ -156,7 +154,7 @@ Updates a task based on its ID.
 Status Code: 201 (Created) if successful, 400 (Bad Request) if request body validation fails.
 Response Body: None (empty response body on success).
 
-## Model
+##Model
 The TaskDAO class provides methods for interacting with task data in a consistent and organized manner. It serves as the Model component in the Model-View-Controller (MVC) architecture for the project. This class allows you to manage tasks stored in the database with clear CRUD (Create, Read, Update, Delete) operations.
 
 ### Create `create(task)`
