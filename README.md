@@ -62,7 +62,7 @@ Task Manager is a user-friendly task manager app that helps you create, edit, re
 
 
 ## 📡 API
-### GET /tasks/
+### GET `/tasks/`
 Retrieves a list of tasks based on the provided query parameter.
 
 #### Request:
@@ -77,7 +77,7 @@ Retrieves a list of tasks based on the provided query parameter.
 - Status Code: 200 (OK)
 - Response Body: An array of task objects.
 
-### POST /tasks/
+### POST `/tasks/`
 Creates a new task.
 
 #### Request:
@@ -99,7 +99,7 @@ Creates a new task.
 - Status Code: 201 (Created) if successful, 400 (Bad Request) if request body validation fails.
 - Response Body: None (empty response body on success).
 
-### DELETE /tasks/:id
+### DELETE `/tasks/:id`
 Deletes a task based on its ID.
 
 #### Request:
@@ -112,7 +112,8 @@ Deletes a task based on its ID.
 
 - Status Code: 201 (Created) if successful.
 - Response Body: None (empty response body).
-### PUT /tasks/:id
+  
+### PUT `/tasks/:id`
 Updates a task based on its ID.
 
 #### Request:
