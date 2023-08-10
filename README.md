@@ -2,19 +2,6 @@
 # ✅ Task Manager
 
 <p align="center">
-  <a href="#-description">Description</a>&nbsp;|&nbsp;
-  <a href="#-deploy">Deploy</a>&nbsp;|&nbsp;
-  <a href="#-usage">Usage</a>&nbsp;|&nbsp;
-  <a href="#-tech-stack">Tech Stack</a>&nbsp;|&nbsp;
-  <a href="#-structure">Structure</a>&nbsp;|&nbsp;
-  <a href="#-api">API Endpoints</a>&nbsp;|&nbsp;
-  <a href="#-dao">DAO</a>&nbsp;|&nbsp;
-  <a href="#-environment-variables">Environment Variables</a>&nbsp;|&nbsp;
-  <a href="#-installing-and-local-development">Installing and Local Development</a>
-</p>
-<br>
-
-<p align="center">
   <img alt="Task Manager Thumbnail" src="./frontend/assets/project_thumbnail.png" width="100%" />
 </p>
 
