@@ -217,7 +217,7 @@ Creates a new task in the database.
 
 `task (object): An object representing the task to be created. It should contain title (string) and description (string) properties.`
 - Usage
-```
+```javascript
 const newTask = {
   title: "Task Title",
   description: "Task Description",
@@ -231,7 +231,7 @@ Searches for tasks in the database that match the provided search term and retur
 `searchTerm (string): The search term to be used for filtering tasks.`
 
 - Usage
-```
+```javascript
 const searchTerm = "search term";
 const searchResults = await task.search(searchTerm);
 ```
@@ -242,7 +242,7 @@ Updates an existing task in the database.
 `updatedTask (object): An object representing the updated task. It should contain id (string), title (string), and description (string) properties.`
 
 - Usage
-```
+```javascript
 const updatedTask = {
   id: "task-id",
   title: "Updated Task Title",
@@ -257,7 +257,7 @@ Deletes a task from the database.
 
 `id (string): The ID of the task to be deleted.`
 - Usage
-```
+```javascript
 const taskIdToDelete = "task-id-to-delete";
 await task.delete(taskIdToDelete);
 ```
