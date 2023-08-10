@@ -60,6 +60,74 @@ Task Manager is a user-friendly task manager app that helps you create, edit, re
   <img alt="Task Manager Thumbnail" src="./frontend/assets/architecture.png" width="100%" />
 </p>
 
+## 🧰 Redux Toolkit API `tasksApi`
+The `tasksApi` is a set of Redux Toolkit API endpoints created using the `createApi` function. It provides a streamlined way to manage asynchronous data fetching and state management for tasks in the application.
+
+### Endpoints
+
+#### `searchTasks`
+
+This endpoint allows you to search for tasks based on a search term.
+
+- Method: GET
+- Query Arguments:
+  - `searchTerm` (optional): Search term for filtering tasks.
+- URL: `/`
+- Provides Tags: `["Task"]`
+
+#### `deleteTask`
+This endpoint allows you to delete a task by its ID.
+
+- Method: DELETE
+- Mutation Arguments:
+  - `taskId`: ID of the task to delete.
+- URL: `/${taskId}`
+- Invalidates Tags: `["Task"]`
+
+#### `createTask`
+This endpoint allows you to create a new task.
+
+Method: POST
+- Mutation Arguments:
+  - `task`: Task object with title and description properties.
+- URL: `/`
+- Invalidates Tags: `["Task"]`
+
+#### `updateTask`
+This endpoint allows you to update an existing task.
+
+- Method: PUT
+- Mutation Arguments:
+  - `task`: Updated Task object with id, title, and description properties.
+- URL: `/${task.id}`
+- Invalidates Tags: `["Task"]`
+
+#### Exported Hooks and Instances
+The following hooks and instances are exported for use in the application:
+
+- `useSearchTasksQuery`: Hook to fetch tasks based on search criteria.
+- `useDeleteTaskMutation`: Hook to delete a task by its ID.
+- `useCreateTaskMutation`: Hook to create a new task.
+- `useUpdateTaskMutation`: Hook to update an existing task.
+- `tasksApi`: Instance of the created tasksApi, which encapsulates all the endpoints and configuration.
+
+#### Example Usage
+```javascript
+// Fetch tasks based on search term
+const { data: tasks, isLoading } = useSearchTasksQuery('searchTerm');
+
+// Delete a task
+const deleteTaskMutation = useDeleteTaskMutation();
+deleteTaskMutation.mutate('taskIdToDelete');
+
+// Create a new task
+const createTaskMutation = useCreateTaskMutation();
+createTaskMutation.mutate({ title: 'New Task', description: 'Description' });
+
+// Update an existing task
+const updateTaskMutation = useUpdateTaskMutation();
+updateTaskMutation.mutate({ id: 'taskIdToUpdate', title: 'Updated Task', description: 'Updated Description' });
+```
 
 ## 📡 API
 ### GET `/tasks/`
@@ -246,3 +314,13 @@ Format files with ESLint:
 ```bash
   pnpm format
 ```
+
+## 📈 Opportunities for Improvement
+
+In this section you find the main opportunities for improvement on this project:
+
+- User authentication
+- Pagination
+- Tasks filter
+- Data validation with AceBase Schemas
+- Enhance error handling on API endpoints
