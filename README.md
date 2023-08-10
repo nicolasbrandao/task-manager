@@ -324,3 +324,4 @@ In this section you find the main opportunities for improvement on this project:
 - Tasks filter
 - Data validation with AceBase Schemas
 - Enhance error handling on API endpoints
+- Make the whole project monorepo with turborepo
