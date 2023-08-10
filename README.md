@@ -122,11 +122,18 @@ deleteTaskMutation.mutate('taskIdToDelete');
 
 // Create a new task
 const createTaskMutation = useCreateTaskMutation();
-createTaskMutation.mutate({ title: 'New Task', description: 'Description' });
+createTaskMutation.mutate({
+  title: 'New Task',
+  description: 'Description'
+});
 
 // Update an existing task
 const updateTaskMutation = useUpdateTaskMutation();
-updateTaskMutation.mutate({ id: 'taskIdToUpdate', title: 'Updated Task', description: 'Updated Description' });
+updateTaskMutation.mutate({
+  id: 'taskIdToUpdate',
+  title: 'Updated Task',
+  description: 'Updated Description'
+});
 ```
 
 ## 📡 API
