@@ -8,7 +8,7 @@
   <a href="#-tech-stack">Tech Stack</a>&nbsp;|&nbsp;
   <a href="#-structure">Structure</a>&nbsp;|&nbsp;
   <a href="#-api">API Endpoints</a>&nbsp;|&nbsp;
-  <a href="#-data-access-object">Data Access Object</a>&nbsp;|&nbsp;
+  <a href="#-dao">DAO</a>&nbsp;|&nbsp;
   <a href="#-environment-variables">Environment Variables</a>&nbsp;|&nbsp;
   <a href="#-installing-and-local-development">Installing and Local Development</a>
 </p>
@@ -22,7 +22,7 @@
 ## 📙 Description
 
 Task Manager is a user-friendly task manager app that helps you create, edit, remove, and search tasks effortlessly. Store all your tasks in a database for easy access across devices. Stay organized, increase productivity, and achieve your goals with Task Manager!
-[teste]("#--usage")
+
 
 ## 💻 Deploy
 
@@ -153,7 +153,7 @@ Updates a task based on its ID.
 Status Code: 201 (Created) if successful, 400 (Bad Request) if request body validation fails.
 Response Body: None (empty response body on success).
 
-## 🗄️ Data Access Object
+## 🗄️ DAO
 The TaskDAO class provides methods for interacting with task data in a consistent and organized manner. It serves as the Model component in the Model-View-Controller (MVC) architecture for the project. This class allows you to manage tasks stored in the database with clear CRUD (Create, Read, Update, Delete) operations.
 
 ### Create `create(task)`
