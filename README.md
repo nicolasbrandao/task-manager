@@ -160,7 +160,7 @@ Creates a new task.
 - Method: POST
 - Path: /tasks/
 - Request Body (JSON):
-```
+```json
 {
   "title": "Task Title",
   "description": "Task Description"
@@ -200,7 +200,7 @@ Updates a task based on its ID.
 - Request Body (JSON):
 
 
-```
+```json
 {
   "title": "Updated Task Title",
   "description": "Updated Task Description"
