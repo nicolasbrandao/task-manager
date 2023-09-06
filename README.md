@@ -118,18 +118,18 @@ const { data: tasks, isLoading } = useSearchTasksQuery('searchTerm');
 
 // Delete a task
 const deleteTaskMutation = useDeleteTaskMutation();
-deleteTaskMutation.mutate('taskIdToDelete');
+deleteTaskMutation('taskIdToDelete');
 
 // Create a new task
 const createTaskMutation = useCreateTaskMutation();
-createTaskMutation.mutate({
+createTaskMutation({
   title: 'New Task',
   description: 'Description'
 });
 
 // Update an existing task
 const updateTaskMutation = useUpdateTaskMutation();
-updateTaskMutation.mutate({
+updateTaskMutation({
   id: 'taskIdToUpdate',
   title: 'Updated Task',
   description: 'Updated Description'
